@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Mumtaz Backend API
 
@@ -132,3 +133,6 @@ Built with ❤️ by **Mujtaba Kamal** and **ChatGPT Assistant**.
 - Setup CI/CD pipelines for deployment.
 
 ---
+=======
+# almumtaz-backend
+>>>>>>> cb3ff7e899378abf1f49a1d8148ddf8529e74037
