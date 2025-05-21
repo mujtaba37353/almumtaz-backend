@@ -8,7 +8,13 @@ const productSchema = new mongoose.Schema({
   category: { type: String },
   sku: { type: String },
   barcodes: [{ type: String }],
-  image: { type: String }, // 🔥 رابط صورة المنتج
+  image: { type: String },
+  specifications: [
+    {
+      name: { type: String, required: true },
+      price: { type: Number },
+    }
+  ],
   store: { 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Store',

@@ -9,6 +9,7 @@ const subscriptionSchema = new mongoose.Schema({
   allowedUsers: { type: Number, required: true },
   allowedStores: { type: Number, required: true },
   allowedProducts: { type: Number, required: true },
+  active: { type: Boolean, default: true },
 }, { timestamps: true });
 
 const Subscription = mongoose.model('Subscription', subscriptionSchema);

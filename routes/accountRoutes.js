@@ -15,6 +15,8 @@ router.post('/', protect, authorizeRoles('AccountOwner'), createAccount);
 router.get('/', protect, authorizeRoles('AppOwner', 'AppAdmin'), getAccounts);
 router.get('/:id', protect, authorizeRoles('AccountOwner', 'AppOwner', 'AppAdmin'), getAccountById);
 router.put('/:id', protect, authorizeRoles('AccountOwner'), updateAccount);
-router.delete('/:id', protect, authorizeRoles('AppOwner', 'AppAdmin'), deleteAccount);
+// 🔒 فقط AccountOwner يستطيع الوصول
+router.delete('/:id', protect, authorizeRoles('AccountOwner'), deleteAccount);
+
 
 module.exports = router;

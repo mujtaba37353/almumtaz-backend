@@ -12,9 +12,16 @@ const saleRoutes = require('./routes/saleRoutes');
 const reportRoutes = require('./routes/reportRoutes');
 const subscriptionRoutes = require('./routes/subscriptionRoutes');
 
+
 const path = require('path');
 const uploadRoutes = require('./routes/uploadRoutes');
 
+const cors = require('cors');
+
+app.use(cors({
+  origin: '*', // لتجربة محلية. لاحقًا يمكن تحديد النطاق بدقة
+  credentials: true,
+}));
 
 
 
@@ -65,6 +72,7 @@ app.get('/', (req, res) => {
 
 // تشغيل السيرفر
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ Server running on http://172.20.10.12:${PORT}`);
 });
+

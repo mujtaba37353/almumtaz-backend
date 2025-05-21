@@ -1,32 +1,33 @@
+// uploadMiddleware.js
 const multer = require('multer');
 const path = require('path');
 
-// إعداد تخزين الملفات
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, 'uploads/'); // مجلد حفظ الصور
+    cb(null, 'uploads/images/');
   },
   filename(req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    const ext = path.extname(file.originalname);
+    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
+    cb(null, uniqueName);
   },
 });
 
-// فلترة الملفات (صور فقط)
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpg|jpeg|png/;
-  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = allowedTypes.test(file.mimetype);
+const imageFilter = (req, file, cb) => {
+  const filetypes = /jpeg|jpg|png|gif|webp/;
+  const mimetype = filetypes.test(file.mimetype);
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
 
-  if (extname && mimetype) {
+  if (mimetype && extname) {
     return cb(null, true);
-  } else {
-    cb(new Error('Images only!'));
   }
+  cb(new Error('Only image files are allowed!'));
 };
 
 const upload = multer({
   storage,
-  fileFilter,
+  fileFilter: imageFilter,
+  limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-module.exports = { upload };
+module.exports = upload;
